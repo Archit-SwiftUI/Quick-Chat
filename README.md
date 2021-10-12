@@ -1,0 +1,38 @@
+App Features
+- 1-1 Private Chats
+- Photo Messages
+- Video Messages
+- Audio Messages (Recorded messages)
+- Firebase Backend
+- Push Notifications
+- Dark Mode support
+- Phone Authentication with SMS
+- Typing Indicators
+- Mentions
+- Message Read Status / Seen Status (including groups)
+- Loading States
+- Text Messages
+- Group Management
+- Group Creation
+- Edit members
+- Admin roles
+- Make admin / Remove admin
+- Leave group
+- Friends Search
+- Friendship Management (Add Friend, Accept Friend Request, Cancel Friend Request)
+- Photo Camera integration
+- Email & Password Authentication
+- Real-time updates & real-time messaging
+- Emoji Support
+- Profile Photo Uploads with Firebase Storage
+- Settings Screen
+- Account Details Screen
+- Profile Screen
+- URL Click Handling
+- Renaming groups
+- Leaving Groups
+- Empty States
+- Firebase Auth & Firebase Database Firestore
+- Firebase Storage integration
+- “Save Password” functionality
+- Forgot Password / Password Reset
