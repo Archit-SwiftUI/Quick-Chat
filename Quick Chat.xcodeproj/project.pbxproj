@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7308D95C2715FFA80025129F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7308D95B2715FFA80025129F /* User.swift */; };
+		7308D9602716043C0025129F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7308D95F2716043C0025129F /* Constants.swift */; };
+		7308D962271606B30025129F /* FCollectionReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7308D961271606B30025129F /* FCollectionReference.swift */; };
+		7308D965271607BC0025129F /* FirebaseUserListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7308D964271607BC0025129F /* FirebaseUserListener.swift */; };
 		738CF8C827138C81000EA497 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738CF8C727138C81000EA497 /* AppDelegate.swift */; };
 		738CF8CA27138C81000EA497 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738CF8C927138C81000EA497 /* SceneDelegate.swift */; };
 		738CF8CC27138C81000EA497 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738CF8CB27138C81000EA497 /* LoginViewController.swift */; };
@@ -19,6 +23,10 @@
 
 /* Begin PBXFileReference section */
 		477027FE9AEAFFC39C60E48F /* Pods-Quick Chat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Quick Chat.debug.xcconfig"; path = "Target Support Files/Pods-Quick Chat/Pods-Quick Chat.debug.xcconfig"; sourceTree = "<group>"; };
+		7308D95B2715FFA80025129F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		7308D95F2716043C0025129F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		7308D961271606B30025129F /* FCollectionReference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCollectionReference.swift; sourceTree = "<group>"; };
+		7308D964271607BC0025129F /* FirebaseUserListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseUserListener.swift; sourceTree = "<group>"; };
 		738CF8C427138C81000EA497 /* Quick Chat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Quick Chat.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		738CF8C727138C81000EA497 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		738CF8C927138C81000EA497 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -44,6 +52,58 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7308D95D2715FFB00025129F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7308D95B2715FFA80025129F /* User.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		7308D95E271601BF0025129F /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				738CF8CB27138C81000EA497 /* LoginViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		7308D9632716077C0025129F /* FirebaseReference */ = {
+			isa = PBXGroup;
+			children = (
+				7308D961271606B30025129F /* FCollectionReference.swift */,
+				7308D964271607BC0025129F /* FirebaseUserListener.swift */,
+			);
+			name = FirebaseReference;
+			sourceTree = "<group>";
+		};
+		7308D966271632CE0025129F /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				7308D95F2716043C0025129F /* Constants.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		7308D967271632E40025129F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				738CF8CD27138C81000EA497 /* Main.storyboard */,
+				738CF8D027138C82000EA497 /* Assets.xcassets */,
+				738CF8D227138C82000EA497 /* LaunchScreen.storyboard */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		7308D968271632FF0025129F /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				738CF8C727138C81000EA497 /* AppDelegate.swift */,
+				738CF8C927138C81000EA497 /* SceneDelegate.swift */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		738CF8BB27138C81000EA497 = {
 			isa = PBXGroup;
 			children = (
@@ -65,12 +125,12 @@
 		738CF8C627138C81000EA497 /* Quick Chat */ = {
 			isa = PBXGroup;
 			children = (
-				738CF8C727138C81000EA497 /* AppDelegate.swift */,
-				738CF8C927138C81000EA497 /* SceneDelegate.swift */,
-				738CF8CB27138C81000EA497 /* LoginViewController.swift */,
-				738CF8CD27138C81000EA497 /* Main.storyboard */,
-				738CF8D027138C82000EA497 /* Assets.xcassets */,
-				738CF8D227138C82000EA497 /* LaunchScreen.storyboard */,
+				7308D968271632FF0025129F /* Resources */,
+				7308D966271632CE0025129F /* Constants */,
+				7308D9632716077C0025129F /* FirebaseReference */,
+				7308D95D2715FFB00025129F /* Model */,
+				7308D95E271601BF0025129F /* Controllers */,
+				7308D967271632E40025129F /* Views */,
 				738CF8D527138C82000EA497 /* Info.plist */,
 				738CF8DB27138F8B000EA497 /* GoogleService-Info.plist */,
 			);
@@ -210,8 +270,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7308D962271606B30025129F /* FCollectionReference.swift in Sources */,
+				7308D9602716043C0025129F /* Constants.swift in Sources */,
+				7308D95C2715FFA80025129F /* User.swift in Sources */,
 				738CF8CC27138C81000EA497 /* LoginViewController.swift in Sources */,
 				738CF8C827138C81000EA497 /* AppDelegate.swift in Sources */,
+				7308D965271607BC0025129F /* FirebaseUserListener.swift in Sources */,
 				738CF8CA27138C81000EA497 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

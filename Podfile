@@ -13,8 +13,10 @@ pod 'Firebase/Firestore'
 pod 'Firebase/Storage'
 pod 'Firebase/Analytics'
 pod 'Firebase/Messaging'
+pod 'FirebaseFirestoreSwift', '> 7.0-beta'
 
 pod 'Gallery'
+pod 'RealmSwift'
 
 pod 'NVActivityIndicatorView/AppExtension'
 pod 'ProgressHUD'

@@ -7,6 +7,8 @@
 
 import UIKit
 import ProgressHUD
+import Firebase
+import FirebaseAuth
 
 class LoginViewController: UIViewController {
     
@@ -17,6 +19,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordLabelOutlet: UILabel!
     @IBOutlet weak var repeatPasswordLabelOutlet: UILabel!
     @IBOutlet weak var signUpLabel: UILabel!
+   
     
     //TextFields
     @IBOutlet weak var emailTextfield: UITextField!
@@ -50,8 +53,7 @@ class LoginViewController: UIViewController {
     @IBAction func loginButtonPressed(_ sender: Any) {
         
         if isDataInputedFor(type: isLogin ? "login" : "register") {
-            //login or register
-            print("have data for login/reg")
+            isLogin ? loginUser() : registerUser()
             
         } else {
             ProgressHUD.showFailed("All Fields are required")
@@ -62,7 +64,7 @@ class LoginViewController: UIViewController {
         
         if isDataInputedFor(type: "password") {
             //reset password
-            print("Have data for forget password.")
+            resetPassword()
             
         } else {
             ProgressHUD.showFailed("Email is required.")
@@ -73,7 +75,7 @@ class LoginViewController: UIViewController {
         
         if isDataInputedFor(type: "password") {
             //resend verification email
-            print("Have data for resend email")
+           resendVerificationEmail()
             
         } else {
             ProgressHUD.showFailed("Email is required.")
@@ -155,6 +157,83 @@ class LoginViewController: UIViewController {
         }
     }
     
+    //MARK: - Register
     
+    private func registerUser() {
+        
+        if passwordTextfield.text! == repeatPasswordTextfield.text! {
+            
+            FirebaseUserListener.shared.registerUserWith(email: emailTextfield.text!, password: passwordTextfield.text!) { error in
+                print(self.emailTextfield.text!)
+                
+                if error == nil {
+                    ProgressHUD.showSuccess("Verification email sent..")
+                    self.resentEmailButtonOutlet.isHidden = false
+                } else {
+                    ProgressHUD.showFailed(error!.localizedDescription)
+                }
+            }
+        } else {
+            ProgressHUD.showFailed("The password don't match")
+        }
+        
+    }
+    
+    //MARK: - Login
+    
+    private func loginUser() {
+        
+        
+        FirebaseUserListener.shared.loginUserWithEmail(email: emailTextfield.text!, password: passwordTextfield.text!) { error, isEmailVerified in
+            if error == nil {
+                
+                if isEmailVerified {
+                    
+                    self.goToApp()
+                    
+                } else {
+                    ProgressHUD.showFailed("Please verify email.")
+                    self.resentEmailButtonOutlet.isHidden = false
+
+                }
+            } else {
+                ProgressHUD.showFailed(error!.localizedDescription)
+            }
+            return true
+        }
+    }
+    
+    
+    private func resetPassword() {
+        
+        FirebaseUserListener.shared.resetPasswordFor(email: emailTextfield.text!) { error in
+            if error == nil {
+                ProgressHUD.showSuccess("Reset link send to email")
+            } else {
+                ProgressHUD.showFailed(error!.localizedDescription)
+            }
+        }
+    }
+    
+    private func resendVerificationEmail(){
+        FirebaseUserListener.shared.resendVerificationEmail(email: emailTextfield.text!) { error in
+            if error == nil {
+                
+                ProgressHUD.showSuccess("New verification email sent.")
+                
+            } else {
+                ProgressHUD.showError(error!.localizedDescription)
+            }
+        }
+    }
+    //MARK: - Navigation
+    
+    
+    private func goToApp() {
+        
+        let mainView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainApp") as! UITabBarController
+        mainView.modalPresentationStyle = .fullScreen
+        self.present(mainView, animated: true, completion: nil)
+    }
 }
 

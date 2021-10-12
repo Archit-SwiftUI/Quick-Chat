@@ -272,6 +272,8 @@ PODS:
     - "gRPC-C++ (~> 1.28.0)"
     - leveldb-library (~> 1.22)
     - nanopb (~> 2.30907.0)
+  - FirebaseFirestoreSwift (7.11.0-beta):
+    - FirebaseFirestore (~> 7.0)
   - FirebaseInstallations (7.6.0):
     - FirebaseCore (~> 7.0)
     - GoogleUtilities/Environment (~> 7.0)
@@ -359,6 +361,11 @@ PODS:
   - NVActivityIndicatorView/AppExtension (4.8.0)
   - ProgressHUD (13.6)
   - PromisesObjC (1.2.12)
+  - Realm (10.7.6):
+    - Realm/Headers (= 10.7.6)
+  - Realm/Headers (10.7.6)
+  - RealmSwift (10.7.6):
+    - Realm (= 10.7.6)
   - Shuffle-iOS (0.5.0)
   - SKPhotoBrowser (7.0.0)
 
@@ -369,11 +376,13 @@ DEPENDENCIES:
   - Firebase/Firestore
   - Firebase/Messaging
   - Firebase/Storage
+  - FirebaseFirestoreSwift (> 7.0-beta)
   - Gallery
   - InputBarAccessoryView
   - MessageKit
   - NVActivityIndicatorView/AppExtension
   - ProgressHUD
+  - RealmSwift
   - Shuffle-iOS
   - SKPhotoBrowser
 
@@ -387,6 +396,7 @@ SPEC REPOS:
     - FirebaseCore
     - FirebaseCoreDiagnostics
     - FirebaseFirestore
+    - FirebaseFirestoreSwift
     - FirebaseInstallations
     - FirebaseInstanceID
     - FirebaseMessaging
@@ -405,6 +415,8 @@ SPEC REPOS:
     - NVActivityIndicatorView
     - ProgressHUD
     - PromisesObjC
+    - Realm
+    - RealmSwift
     - Shuffle-iOS
     - SKPhotoBrowser
 
@@ -417,6 +429,7 @@ SPEC CHECKSUMS:
   FirebaseCore: 0a43b7f1c5b36f3358cd703011ca4c7e0df55870
   FirebaseCoreDiagnostics: ee1184d51da3293335b83355aad20f537acc24cf
   FirebaseFirestore: b860346d5095c741528efac94995bab39275d0bf
+  FirebaseFirestoreSwift: 1e3899e6430e77267cac7da81c555f7a7a49a549
   FirebaseInstallations: 6e4e77396559bc2ae0504823837ed737b1c7e47f
   FirebaseInstanceID: ad5135045a498d7775903efd39762d2cdfa1be27
   FirebaseMessaging: 4b9b2850fcfcaac2820097ee3703ba6cfff3df84
@@ -435,9 +448,11 @@ SPEC CHECKSUMS:
   NVActivityIndicatorView: d24b7ebcf80af5dcd994adb650e2b6c93379270f
   ProgressHUD: 4bdaa0d2ddf676b23324b199f9facffb5c3a1620
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
+  Realm: ed860452717c8db8f4bf832b6807f7f2ce708839
+  RealmSwift: e31c4ddbcc42ac879313d656b86f9ca539f6f4f4
   Shuffle-iOS: ff33658fb1e5eebd6a4724c156473e63754be9cb
   SKPhotoBrowser: 6aaa8f232752e87c7e76bace183bead0a137097d
 
-PODFILE CHECKSUM: bd8bd57e3c12badd60f3f02f69b7f67a003f497c
+PODFILE CHECKSUM: e6353a843b7b54a96cb59c71471808535869f539
 
 COCOAPODS: 1.10.2
