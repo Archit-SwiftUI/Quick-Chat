@@ -11,3 +11,6 @@ let userDefaults  = UserDefaults.standard
 public let kFILEREFERENCE = "gs://quick-chat-917b2.appspot.com"
 
 public let KCURRENTUSER = "currentUser"
+public let KSTATUS = "status"
+public let kFIRSTRUN = "firstRUN"
+
