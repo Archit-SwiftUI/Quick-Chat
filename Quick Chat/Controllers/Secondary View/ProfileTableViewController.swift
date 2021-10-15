@@ -50,7 +50,12 @@ class ProfileTableViewController: UITableViewController {
             print("Start chating")
         }
         
-        //TODO:  Go to chatroom
+        let chatId = startChat(user1: User.currentUser!, user2: user!)
+        
+        let privateChatView = ChatViewController(chatId: chatId, recpientId: user!.id, recpientName: user!.username)
+        
+        privateChatView.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(privateChatView, animated: true)
     }
     //MARK: - Setup UI
 

@@ -122,7 +122,6 @@ func fileExistsAtPath(path: String) -> Bool {
 func fileInDocumentsDirectory(fileName: String) -> String {
     
     return getDocumentsURL().appendingPathComponent(fileName).path
-    
 }
 
 func getDocumentsURL() -> URL {

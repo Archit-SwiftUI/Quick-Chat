@@ -8,7 +8,6 @@
 import Foundation
 import UIKit
 
-
 extension UIImage {
     
     var isPortrait : Bool {
@@ -37,12 +36,21 @@ extension UIImage {
         defer {
             UIGraphicsEndImageContext()
         }
+        
         guard let cgImage = cgImage?.cropping(to: CGRect(origin: CGPoint(x: isLandscape ? floor((size.width - size.height) / 2) : 0, y: isPortrait ? floor((size.height - size.width) / 2) : 0 ), size: breadthSize)) else  {
             return nil
         }
         UIBezierPath(ovalIn: breadthRect).addClip()
         UIImage(cgImage: cgImage).draw(in: breadthRect)
         return UIGraphicsGetImageFromCurrentImageContext()
-        
+    }
+}
+
+extension Date {
+    
+    func longDate() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd MMM yyy"
+        return dateFormatter.string(from: self)
     }
 }
