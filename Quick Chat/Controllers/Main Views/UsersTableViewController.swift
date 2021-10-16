@@ -24,7 +24,7 @@ class UsersTableViewController: UITableViewController {
         
         downloadUsers()
         setupSearchController()
-        tableView.tableFooterView = UIView()
+//        tableView.tableFooterView = UIView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -60,7 +60,7 @@ class UsersTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        5
+        return 5.0
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

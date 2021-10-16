@@ -16,4 +16,15 @@ public let kFIRSTRUN = "firstRUN"
 public let KCHATROOMID = "chatRoomId"
 public let kSENDERID = "senderId"
 
+public let kSENT = "Sent"
+public let kREAD = "Read"
+public let kTEXT = "Text"
+public let kPHOTO = "Photo"
+public let kVIDEO = "Vidoe"
+public let kAUDIO = "Audio"
+public let kLOCATION = "Location"
+public let kDATE = "date"
+
+
+
 

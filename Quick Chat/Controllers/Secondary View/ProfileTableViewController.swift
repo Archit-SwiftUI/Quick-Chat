@@ -24,7 +24,7 @@ class ProfileTableViewController: UITableViewController {
         super.viewDidLoad()
         
         navigationItem.largeTitleDisplayMode = .never
-        tableView.tableFooterView = UIView()
+//        tableView.tableFooterView = UIView()
         
         setupUI()
 
@@ -72,6 +72,5 @@ class ProfileTableViewController: UITableViewController {
                 }
             }
         }
-        
     }
 }

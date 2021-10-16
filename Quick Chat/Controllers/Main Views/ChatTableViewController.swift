@@ -20,7 +20,7 @@ class ChatTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.tableFooterView = UIView()
+//        tableView.tableFooterView = UIView()
         downloadRecentChats()
         setupSearchController()
     }
