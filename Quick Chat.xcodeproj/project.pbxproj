@@ -45,6 +45,8 @@
 		738CF8D127138C82000EA497 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 738CF8D027138C82000EA497 /* Assets.xcassets */; };
 		738CF8D427138C82000EA497 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 738CF8D227138C82000EA497 /* LaunchScreen.storyboard */; };
 		738CF8DC27138F8B000EA497 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 738CF8DB27138F8B000EA497 /* GoogleService-Info.plist */; };
+		73AB4C01271CA77300CD8D81 /* IncomingMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AB4C00271CA77300CD8D81 /* IncomingMessage.swift */; };
+		73AB4C03271CDCF600CD8D81 /* FirebaseTypingListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AB4C02271CDCF600CD8D81 /* FirebaseTypingListener.swift */; };
 		FC22B03EA869B63A430703B9 /* Pods_Quick_Chat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFAB80F8069EC48B71A51224 /* Pods_Quick_Chat.framework */; };
 /* End PBXBuildFile section */
 
@@ -90,6 +92,8 @@
 		738CF8D327138C82000EA497 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		738CF8D527138C82000EA497 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		738CF8DB27138F8B000EA497 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		73AB4C00271CA77300CD8D81 /* IncomingMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomingMessage.swift; sourceTree = "<group>"; };
+		73AB4C02271CDCF600CD8D81 /* FirebaseTypingListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseTypingListener.swift; sourceTree = "<group>"; };
 		827EBA27B45C4B9BC9D468B9 /* Pods-Quick Chat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Quick Chat.release.xcconfig"; path = "Target Support Files/Pods-Quick Chat/Pods-Quick Chat.release.xcconfig"; sourceTree = "<group>"; };
 		FFAB80F8069EC48B71A51224 /* Pods_Quick_Chat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Quick_Chat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -113,8 +117,9 @@
 				7308D97F27189D8E0025129F /* Status.swift */,
 				73305B942719E32B00DF7645 /* RecentChat.swift */,
 				732FF527271B515200C0A8A6 /* MKMessage.swift */,
-				732FF529271B52EC00C0A8A6 /* RealmMessage */,
 				732FF52E271B5A9100C0A8A6 /* OutgoingMessage.swift */,
+				73AB4C00271CA77300CD8D81 /* IncomingMessage.swift */,
+				732FF529271B52EC00C0A8A6 /* RealmMessage */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -140,6 +145,7 @@
 				7308D97927178AFC0025129F /* FileStorage.swift */,
 				73305B9A2719F49500DF7645 /* FirebaseRecentListener.swift */,
 				732FF530271B61B900C0A8A6 /* FirebaseMessagesListener.swift */,
+				73AB4C02271CDCF600CD8D81 /* FirebaseTypingListener.swift */,
 			);
 			name = FirebaseHelpers;
 			sourceTree = "<group>";
@@ -424,10 +430,12 @@
 				7308D95C2715FFA80025129F /* User.swift in Sources */,
 				732FF52F271B5A9100C0A8A6 /* OutgoingMessage.swift in Sources */,
 				7308D98C2718C74E0025129F /* ProfileTableViewController.swift in Sources */,
+				73AB4C03271CDCF600CD8D81 /* FirebaseTypingListener.swift in Sources */,
 				738CF8CC27138C81000EA497 /* LoginViewController.swift in Sources */,
 				7308D97627175A6F0025129F /* SettingsTableViewController.swift in Sources */,
 				7308D97E27179C040025129F /* Extensions.swift in Sources */,
 				7308D97827176B720025129F /* EditProfileTableViewController.swift in Sources */,
+				73AB4C01271CA77300CD8D81 /* IncomingMessage.swift in Sources */,
 				7308D9822718A25E0025129F /* StatusTableViewController.swift in Sources */,
 				732FF531271B61B900C0A8A6 /* FirebaseMessagesListener.swift in Sources */,
 				73305B9F271A2DA700DF7645 /* ChatViewController.swift in Sources */,
@@ -588,6 +596,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5YMAD93VM2;
@@ -617,6 +626,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5YMAD93VM2;

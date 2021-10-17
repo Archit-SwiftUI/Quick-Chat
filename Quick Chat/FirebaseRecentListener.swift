@@ -24,18 +24,18 @@ class FirebaseRecentListener {
                 return
             }
             
-            let allRecent = documents.compactMap { (snapshot) -> RecentChat? in
+            let allRecents = documents.compactMap { (snapshot) -> RecentChat? in
                 return try? snapshot.data(as: RecentChat.self)
                 
             }
             
-            for recent in allRecent {
+            for recent in allRecents {
                 if recent.lastMessage != "" {
                     recentChats.append(recent)
                 }
             }
             
-            recentChats.sorted(by: {$0.date! > $1.date!})
+            recentChats.sort(by: {$0.date! > $1.date!})
             completion(recentChats)
         }
     }

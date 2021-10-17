@@ -105,7 +105,6 @@ class UsersTableViewController: UITableViewController {
         filteredUsers = allUsers.filter({ (user) -> Bool in
             return user.username.lowercased().contains(searchText.lowercased())
         })
-        
         tableView.reloadData()
     }
     
@@ -135,8 +134,5 @@ extension UsersTableViewController : UISearchResultsUpdating {
     
     func updateSearchResults(for searchController: UISearchController) {
         filteredContentForSearchText(searchText: searchController.searchBar.text!)
-        
     }
-    
-    
 }

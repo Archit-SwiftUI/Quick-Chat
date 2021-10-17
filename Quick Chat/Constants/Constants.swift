@@ -25,6 +25,7 @@ public let kAUDIO = "Audio"
 public let kLOCATION = "Location"
 public let kDATE = "date"
 
+public let kNUMBEROFMESSAGES = 12
 
 
 
