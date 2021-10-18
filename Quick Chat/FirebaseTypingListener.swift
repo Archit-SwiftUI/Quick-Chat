@@ -5,29 +5,33 @@
 //  Created by Archit Patel on 2021-10-17.
 //
 
+
 import Foundation
 import Firebase
 
 class FirebaseTypingListener {
     
     static let shared = FirebaseTypingListener()
+    
     var typingListener: ListenerRegistration!
     
-    private init() {}
+    private init() { }
     
-    func createTypingObserver(chatRoomId: String, completion: @escaping(_ isTyping: Bool) -> Void) {
+    func createTypingObserver(chatRoomId: String, completion: @escaping (_ isTyping: Bool) -> Void) {
         
-        typingListener = FirebaseReference(.Typing).document(chatRoomId).addSnapshotListener({ snapshot, error  in
-            guard let snapshot = snapshot else {return}
+        typingListener = FirebaseReference(.Typing).document(chatRoomId).addSnapshotListener({ (snapshot, error) in
+            
+            guard let snapshot = snapshot else { return }
             
             if snapshot.exists {
+                
                 for data in snapshot.data()! {
+                    
                     if data.key != User.currentId {
                         completion(data.value as! Bool)
                     }
                 }
             } else {
-                
                 completion(false)
                 FirebaseReference(.Typing).document(chatRoomId).setData([User.currentId : false])
             }

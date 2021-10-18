@@ -61,6 +61,8 @@ class ChatViewController: MessagesViewController {
     
     var typingCounter = 0
     
+    var gallery: GalleryController!
+    
     //Listeners
     
     var notificationToken: NotificationToken?
@@ -87,17 +89,18 @@ class ChatViewController: MessagesViewController {
         
         navigationItem.largeTitleDisplayMode = .never
         
-        configureMessageInputBar()
-        configureMessageCollectionView()
-        
-        loadChats()
+        createTypingObserver()
         
         configureLeftbarButton()
         configureCustomTitle()
         
-        listenForNewChats()
+        configureMessageCollectionView()
+    
+        configureMessageInputBar()
         
-        createTypingObserver()
+        loadChats()
+        listenForNewChats()
+        listenForReadStatusChange()
         
     }
     
@@ -126,7 +129,8 @@ class ChatViewController: MessagesViewController {
         attachButton.setSize(CGSize(width: 30, height: 30), animated: false)
         
         attachButton.onTouchUpInside { item in
-            print("attach button is pressed")
+            
+            self.actionAttachMessage()
         }
         
         micButton.image = UIImage(systemName: "mic.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 30))
@@ -153,7 +157,6 @@ class ChatViewController: MessagesViewController {
         } else {
             messageInputBar.setStackViewItems([messageInputBar.sendButton], forStack: .right, animated: false)
             messageInputBar.setRightStackViewWidthConstant(to: 55, animated: false)
-
         }
     }
     
@@ -220,6 +223,19 @@ class ChatViewController: MessagesViewController {
     }
     
     //MARK: - Insert Messages
+    
+    private func listenForReadStatusChange() {
+        
+        FirebaseMessageListener.shared.listenForReadStatusChange(User.currentId, collectionId: chatId) { updatedMessage in
+            
+            
+            if updatedMessage.status != kSENT {
+                self.updatedMessage(updatedMessage)
+            }
+        }
+    }
+    
+    
     private func insertMessages() {
         
         maxMessageNumber = allLocalMessages.count - displayMessagesCount
@@ -240,6 +256,11 @@ class ChatViewController: MessagesViewController {
     }
     
     private func insertMessage(_ localMessage: LocalMessage) {
+        
+        if localMessage.senderId != User.currentId {
+            markMessageRead(localMessage)
+        }
+        
         let incoming = IncomingMessage(_collectionView: self)
         self.mkMessages.append(incoming.createMessage(localMessage: localMessage)!)
         displayMessagesCount += 1
@@ -266,6 +287,13 @@ class ChatViewController: MessagesViewController {
         displayMessagesCount += 1
     }
     
+    private func markMessageRead(_ localMessage: LocalMessage) {
+        
+        if localMessage .senderId != User.currentId  && localMessage.status != kREAD {
+            FirebaseMessageListener.shared.updateMessageInFirebase(localMessage, memberIds: [User.currentId, recpientId])
+        }
+    }
+    
     //MARK: - Actions
     
     func messageSend(text: String?, photo: UIImage?, video: String?, audio: String?, location: String?, audioDescription: Float = 0.0) {
@@ -275,13 +303,50 @@ class ChatViewController: MessagesViewController {
     
     @objc func backButtonPressed() {
         
-        //TODO : remove listener
+        FirebaseRecentListener.shared.resetRecentCounter(chatRoomId: chatId)
+        
+        removeListeners()
+        
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    private func actionAttachMessage() {
+        
+        messageInputBar.inputTextView.resignFirstResponder()
+        
+        let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let takePhotoOrVideo = UIAlertAction(title: "Camera", style: .default) { alert in
+            
+            self.showImageGallery(camera: true)
+            print("Show camera...")
+        }
+        let shareMedia = UIAlertAction(title: "Library", style: .default) { alert in
+            
+            self.showImageGallery(camera: false)
+            print("Show library")
+        }
+        let shareLocation = UIAlertAction(title: "Share Location", style: .default) { alert in
+            print("Share Location...")
+        }
+        let cancleAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        takePhotoOrVideo.setValue(UIImage(systemName: "camera"), forKey: "image")
+        shareMedia.setValue(UIImage(systemName: "photo.fill"), forKey: "image")
+        shareLocation.setValue(UIImage(systemName: "mappin.and.ellipse"), forKey: "image")
+        
+        optionMenu.addAction(takePhotoOrVideo)
+        optionMenu.addAction(shareMedia)
+        optionMenu.addAction(shareLocation)
+        optionMenu.addAction(cancleAction)
+        
+        self.present(optionMenu, animated: true, completion: nil)
     }
     
     //MARK: -  Update Typing indicator
     
     func createTypingObserver() {
+        
         FirebaseTypingListener.shared.createTypingObserver(chatRoomId: chatId) { isTyping in
             DispatchQueue.main.async {
                 self.updateTypingIndicator(isTyping)
@@ -292,7 +357,7 @@ class ChatViewController: MessagesViewController {
     func typingIndicatorUpdate() {
         
         typingCounter += 1
-        
+        print("Test.....")
         FirebaseTypingListener.saveTypingCounter(typing: true, chatRoomId: chatId)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
@@ -323,18 +388,92 @@ class ChatViewController: MessagesViewController {
                 self.loadMoreMessages(maxNumber: maxMessageNumber, minNumber: minMessageNumber)
                 messagesCollectionView.reloadDataAndKeepOffset()
             }
-            
             refreshController.endRefreshing()
         }
     }
     
+    //MARK: - Update Read Message Status
+    
+    private func updatedMessage(_ localMessage: LocalMessage) {
+        
+        for index in 0 ..< mkMessages.count {
+            let tempMessage = mkMessages[index]
+            if localMessage.id == tempMessage.messageId {
+                mkMessages[index].status = localMessage.status
+                mkMessages[index].readDate = localMessage.readDate
+                
+                RealmManager.shared.saveToRealm(localMessage)
+                
+                if mkMessages[index].status == kREAD {
+                    self.messagesCollectionView.reloadData()
+                }
+
+            }
+        }
+        
+    }
+    
     //MARK: -  Helpers
+    
+    private func removeListeners() {
+        FirebaseTypingListener.shared.removeTypingListener()
+        FirebaseMessageListener.shared.removeListeners()
+    }
     
     private func lastMessageDate() -> Date {
         
         let lastMessageDate = allLocalMessages.last?.date ?? Date()
         return Calendar.current.date(byAdding: .second, value: 1, to: lastMessageDate) ?? lastMessageDate
     }
+    
+    //MARK: - Gallery
+    
+    private func showImageGallery(camera: Bool) {
+        
+        gallery = GalleryController()
+        gallery.delegate = self
+        
+        Config.tabsToShow = camera ? [.cameraTab] : [.imageTab, .videoTab]
+        Config.Camera.imageLimit = 1
+        Config.initialTab = .imageTab
+        Config.VideoEditor.maximumDuration = 30
+        
+        
+        self.present(gallery, animated: true, completion: nil)
+        
+    }
+}
+
+
+extension ChatViewController : GalleryControllerDelegate {
+    
+    func galleryController(_ controller: GalleryController, didSelectImages images: [Image]) {
+        
+        if images.count > 0 {
+            images.first!.resolve { image in
+                
+                self.messageSend(text: nil, photo: image, video: nil, audio: nil, location: nil)
+                
+            }
+        }
+        controller.dismiss(animated: true, completion: nil)
+        
+    }
+    
+    func galleryController(_ controller: GalleryController, didSelectVideo video: Video) {
+        controller.dismiss(animated: true, completion: nil)
+    }
+    
+    func galleryController(_ controller: GalleryController, requestLightbox images: [Image]) {
+        controller.dismiss(animated: true, completion: nil)
+    }
+    
+    func galleryControllerDidCancel(_ controller: GalleryController) {
+        controller.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    
 }
 
 

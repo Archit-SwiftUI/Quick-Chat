@@ -29,7 +29,7 @@ extension ChatViewController : MessagesLayoutDelegate {
     }
     
     func cellBottomLabelHeight(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
-        return isFromCurrentSender(message: message) ? 17.0 : 0
+        return isFromCurrentSender(message: message) ? 17 : 0
 
     }
     

@@ -60,7 +60,7 @@ class RecentChatTableViewCell: UITableViewCell {
             }
         } else {
             
-            self.avatarImgView.image = UIImage(named: "avatar")?.circleMasked
+            self.avatarImgView.image = UIImage(named: "avatar")
         
         }
     }

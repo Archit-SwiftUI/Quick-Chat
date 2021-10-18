@@ -30,17 +30,51 @@ class FirebaseMessageListener {
                     }
                     
                     switch result {
+                        
                     case .success(let messageObject):
                         if let message = messageObject {
-                        RealmManager.shared.saveToRealm(message)
+                            if message.senderId != User.currentId {
+                                
+                                RealmManager.shared.saveToRealm(message)
+                            }
                         } else {
                             print("Documents dosen't exists")
                         }
+                        
                     case .failure(let error):
                         print("Error decoding local message: \(error.localizedDescription)")
                     }
                 }
             }
+        })
+        
+    }
+    
+    func listenForReadStatusChange(_ documentId : String, collectionId: String, completion: @escaping(_ updatedMessage: LocalMessage) -> Void) {
+        
+        updateChatListener = FirebaseReference(.Messages).document(documentId).collection(collectionId).addSnapshotListener({ snapshot, error in
+            
+            guard let snapshot = snapshot else {return}
+            
+            for change in snapshot.documentChanges {
+                if change.type == .modified {
+                    let result  = Result {
+                        try? change.document.data(as: LocalMessage.self)
+                    }
+                    switch result {
+                    case .success(let messageObject):
+                        if let message = messageObject {
+                            completion(message)
+                        } else {
+                            print("Document does not exists in chat")
+                        }
+                        
+                    case .failure(let error):
+                        print("Error decoding local message", error.localizedDescription)
+                    }
+                }
+            }
+            
         })
         
     }
@@ -76,5 +110,22 @@ class FirebaseMessageListener {
         } catch {
             print("error saving message")
         }
+    }
+    
+    //MARK: - Update message status
+    
+    func updateMessageInFirebase(_ message: LocalMessage, memberIds: [String]) {
+        
+        let values = [KSTATUS : kREAD, kREADDATE : Date()] as [String: Any]
+        
+        for userId in memberIds {
+            FirebaseReference(.Messages).document(userId).collection(message.chatRoomId).document(message.id).updateData(values)
+        }
+        
+    }
+    
+    func removeListeners() {
+        self.newChatListener.remove()
+        self.updateChatListener.remove()
     }
 }

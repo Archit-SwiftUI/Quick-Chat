@@ -21,6 +21,7 @@
 		7308D9842718ADF90025129F /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7308D9832718ADF90025129F /* UserTableViewCell.swift */; };
 		7308D9862718AE270025129F /* UsersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7308D9852718AE260025129F /* UsersTableViewController.swift */; };
 		7308D98C2718C74E0025129F /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7308D98B2718C74D0025129F /* ProfileTableViewController.swift */; };
+		73146F80271E047100953C5C /* PhotoMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73146F7F271E047100953C5C /* PhotoMessage.swift */; };
 		732FF51C271B4E1F00C0A8A6 /* MessageDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732FF51B271B4E1F00C0A8A6 /* MessageDataSource.swift */; };
 		732FF51E271B4E3400C0A8A6 /* MessageCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732FF51D271B4E3400C0A8A6 /* MessageCellDelegate.swift */; };
 		732FF520271B4E4200C0A8A6 /* MessageDisplayDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732FF51F271B4E4200C0A8A6 /* MessageDisplayDelegate.swift */; };
@@ -66,6 +67,7 @@
 		7308D9832718ADF90025129F /* UserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		7308D9852718AE260025129F /* UsersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersTableViewController.swift; sourceTree = "<group>"; };
 		7308D98B2718C74D0025129F /* ProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
+		73146F7F271E047100953C5C /* PhotoMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoMessage.swift; sourceTree = "<group>"; };
 		732FF51B271B4E1F00C0A8A6 /* MessageDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDataSource.swift; sourceTree = "<group>"; };
 		732FF51D271B4E3400C0A8A6 /* MessageCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCellDelegate.swift; sourceTree = "<group>"; };
 		732FF51F271B4E4200C0A8A6 /* MessageDisplayDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDisplayDelegate.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 				732FF527271B515200C0A8A6 /* MKMessage.swift */,
 				732FF52E271B5A9100C0A8A6 /* OutgoingMessage.swift */,
 				73AB4C00271CA77300CD8D81 /* IncomingMessage.swift */,
+				73146F7F271E047100953C5C /* PhotoMessage.swift */,
 				732FF529271B52EC00C0A8A6 /* RealmMessage */,
 			);
 			path = Model;
@@ -439,6 +442,7 @@
 				7308D9822718A25E0025129F /* StatusTableViewController.swift in Sources */,
 				732FF531271B61B900C0A8A6 /* FirebaseMessagesListener.swift in Sources */,
 				73305B9F271A2DA700DF7645 /* ChatViewController.swift in Sources */,
+				73146F80271E047100953C5C /* PhotoMessage.swift in Sources */,
 				7308D98027189D8E0025129F /* Status.swift in Sources */,
 				732FF520271B4E4200C0A8A6 /* MessageDisplayDelegate.swift in Sources */,
 				732FF51C271B4E1F00C0A8A6 /* MessageDataSource.swift in Sources */,

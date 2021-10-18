@@ -21,6 +21,8 @@ class MKMessage: NSObject, MessageType {
         return mkSender
     }
     var senderInitials: String
+    
+    var photoItem : PhotoMessage?
         
     var status: String
     var readDate: Date
@@ -31,9 +33,17 @@ class MKMessage: NSObject, MessageType {
         self.status = message.status
         self.kind  = MessageKind.text(message.message)
         
-//        switch message.type {
-//
-//        }
+        switch message.type {
+        case kTEXT:
+            self.kind = MessageKind.text(message.message)
+        case kPHOTO:
+            let photoItem = PhotoMessage(path: message.pictureUrl)
+            self.kind = MessageKind.photo(photoItem)
+            self.photoItem = photoItem
+        default:
+            print("Unknown message type")
+
+        }
         
         self.senderInitials = message.senderinitials
         self.sentDate = message.date

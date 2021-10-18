@@ -27,5 +27,8 @@ public let kDATE = "date"
 
 public let kNUMBEROFMESSAGES = 12
 
+public let kREADDATE = "date"
+
+
 
 
