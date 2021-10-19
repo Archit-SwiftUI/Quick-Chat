@@ -39,6 +39,11 @@
 		73305B9B2719F49500DF7645 /* FirebaseRecentListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73305B9A2719F49500DF7645 /* FirebaseRecentListener.swift */; };
 		73305B9D2719FF2E00DF7645 /* ChatTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73305B9C2719FF2E00DF7645 /* ChatTableViewController.swift */; };
 		73305B9F271A2DA700DF7645 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73305B9E271A2DA700DF7645 /* ChatViewController.swift */; };
+		733D9025271F5036003B0825 /* VideoMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733D9024271F5036003B0825 /* VideoMessage.swift */; };
+		733D9028271F590E003B0825 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733D9027271F590E003B0825 /* LocationManager.swift */; };
+		733D902A271F5D8C003B0825 /* LocationMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733D9029271F5D8C003B0825 /* LocationMessage.swift */; };
+		733D902C271F5F38003B0825 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733D902B271F5F38003B0825 /* MapViewController.swift */; };
+		733D902E271F624E003B0825 /* MapAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733D902D271F624D003B0825 /* MapAnnotation.swift */; };
 		738CF8C827138C81000EA497 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738CF8C727138C81000EA497 /* AppDelegate.swift */; };
 		738CF8CA27138C81000EA497 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738CF8C927138C81000EA497 /* SceneDelegate.swift */; };
 		738CF8CC27138C81000EA497 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738CF8CB27138C81000EA497 /* LoginViewController.swift */; };
@@ -85,6 +90,11 @@
 		73305B9A2719F49500DF7645 /* FirebaseRecentListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseRecentListener.swift; sourceTree = "<group>"; };
 		73305B9C2719FF2E00DF7645 /* ChatTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewController.swift; sourceTree = "<group>"; };
 		73305B9E271A2DA700DF7645 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		733D9024271F5036003B0825 /* VideoMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoMessage.swift; sourceTree = "<group>"; };
+		733D9027271F590E003B0825 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		733D9029271F5D8C003B0825 /* LocationMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationMessage.swift; sourceTree = "<group>"; };
+		733D902B271F5F38003B0825 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		733D902D271F624D003B0825 /* MapAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAnnotation.swift; sourceTree = "<group>"; };
 		738CF8C427138C81000EA497 /* Quick Chat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Quick Chat.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		738CF8C727138C81000EA497 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		738CF8C927138C81000EA497 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -121,8 +131,10 @@
 				732FF527271B515200C0A8A6 /* MKMessage.swift */,
 				732FF52E271B5A9100C0A8A6 /* OutgoingMessage.swift */,
 				73AB4C00271CA77300CD8D81 /* IncomingMessage.swift */,
-				73146F7F271E047100953C5C /* PhotoMessage.swift */,
+				733D9027271F590E003B0825 /* LocationManager.swift */,
+				733D9026271F503D003B0825 /* Media Messages */,
 				732FF529271B52EC00C0A8A6 /* RealmMessage */,
+				733D902D271F624D003B0825 /* MapAnnotation.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -225,6 +237,7 @@
 			children = (
 				7308D98B2718C74D0025129F /* ProfileTableViewController.swift */,
 				73305B9E271A2DA700DF7645 /* ChatViewController.swift */,
+				733D902B271F5F38003B0825 /* MapViewController.swift */,
 			);
 			path = "Secondary View";
 			sourceTree = "<group>";
@@ -248,6 +261,16 @@
 				732FF52C271B581600C0A8A6 /* RealmMessage.swift */,
 			);
 			path = RealmMessage;
+			sourceTree = "<group>";
+		};
+		733D9026271F503D003B0825 /* Media Messages */ = {
+			isa = PBXGroup;
+			children = (
+				73146F7F271E047100953C5C /* PhotoMessage.swift */,
+				733D9024271F5036003B0825 /* VideoMessage.swift */,
+				733D9029271F5D8C003B0825 /* LocationMessage.swift */,
+			);
+			path = "Media Messages";
 			sourceTree = "<group>";
 		};
 		738CF8BB27138C81000EA497 = {
@@ -435,8 +458,11 @@
 				7308D98C2718C74E0025129F /* ProfileTableViewController.swift in Sources */,
 				73AB4C03271CDCF600CD8D81 /* FirebaseTypingListener.swift in Sources */,
 				738CF8CC27138C81000EA497 /* LoginViewController.swift in Sources */,
+				733D9025271F5036003B0825 /* VideoMessage.swift in Sources */,
 				7308D97627175A6F0025129F /* SettingsTableViewController.swift in Sources */,
 				7308D97E27179C040025129F /* Extensions.swift in Sources */,
+				733D902A271F5D8C003B0825 /* LocationMessage.swift in Sources */,
+				733D902E271F624E003B0825 /* MapAnnotation.swift in Sources */,
 				7308D97827176B720025129F /* EditProfileTableViewController.swift in Sources */,
 				73AB4C01271CA77300CD8D81 /* IncomingMessage.swift in Sources */,
 				7308D9822718A25E0025129F /* StatusTableViewController.swift in Sources */,
@@ -446,6 +472,7 @@
 				7308D98027189D8E0025129F /* Status.swift in Sources */,
 				732FF520271B4E4200C0A8A6 /* MessageDisplayDelegate.swift in Sources */,
 				732FF51C271B4E1F00C0A8A6 /* MessageDataSource.swift in Sources */,
+				733D902C271F5F38003B0825 /* MapViewController.swift in Sources */,
 				73305B9D2719FF2E00DF7645 /* ChatTableViewController.swift in Sources */,
 				732FF522271B4E5700C0A8A6 /* MessageLayoutDelegate.swift in Sources */,
 				73305B992719F05E00DF7645 /* StartChat.swift in Sources */,
@@ -453,6 +480,7 @@
 				7308D965271607BC0025129F /* FirebaseUserListener.swift in Sources */,
 				738CF8CA27138C81000EA497 /* SceneDelegate.swift in Sources */,
 				732FF528271B515200C0A8A6 /* MKMessage.swift in Sources */,
+				733D9028271F590E003B0825 /* LocationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

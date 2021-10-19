@@ -95,6 +95,79 @@ class FileStorage {
         }
     }
     
+    //MARK: - Video
+    
+    
+    class func uploadVideo(_ video: NSData, directory: String, completion: @escaping(_ videoLink: String?) -> Void) {
+        
+        let storageRef = storage.reference(forURL: kFILEREFERENCE).child(directory)
+        
+        
+        var task: StorageUploadTask!
+        
+        task = storageRef.putData(video as Data, metadata: nil, completion: { metaData, error in
+            
+            task.removeAllObservers()
+            ProgressHUD.dismiss()
+            
+            if error != nil {
+                print("Error uploading video \(error!.localizedDescription)" )
+            }
+            
+            storageRef.downloadURL { url, error in
+                
+                guard let downloadURL  = url else {
+                    completion(nil)
+                    return
+                }
+                
+                completion(downloadURL.absoluteString)
+            }
+        })
+        
+        task.observe(StorageTaskStatus.progress) { snapshot in
+            let progress = snapshot.progress!.completedUnitCount / snapshot.progress!.totalUnitCount
+            ProgressHUD.showProgress(CGFloat(progress))
+        }
+    }
+    
+    
+    
+    //MARK: - DownloadVideo
+    
+    class func downloadVideo(videoLink: String, compeltion: @escaping(_ isReadyToPlay: Bool,_ videoFileName: String) -> Void) {
+        
+        let videoUrl = URL(string: videoLink)
+        let videoFileName = fileNameFrom(fileUrl: videoLink) + ".mov"
+        
+        if fileExistsAtPath(path: videoFileName) {
+            
+            compeltion(true, videoFileName)
+            
+        } else {
+            
+            let downloadQueue = DispatchQueue(label: "videoDownloadQueue")
+            
+            downloadQueue.async {
+                
+                let data = NSData(contentsOf: videoUrl!)
+                
+                if data != nil {
+                    
+                   FileStorage.saveFileLocally(fileData: data!, fileName: videoFileName)
+                    
+                    DispatchQueue.main.async {
+                        compeltion(true, videoFileName)
+                    }
+                } else {
+                    print("No document in database")
+                    
+                }
+            }
+        }
+    }
+    
+    
     //MARK: - Save Locally
     
     class func saveFileLocally(fileData: NSData, fileName: String) {

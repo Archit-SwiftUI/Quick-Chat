@@ -23,6 +23,8 @@ class MKMessage: NSObject, MessageType {
     var senderInitials: String
     
     var photoItem : PhotoMessage?
+    var videoItem : VideoMessage?
+    var locationItem: LocationMessage?
         
     var status: String
     var readDate: Date
@@ -34,12 +36,27 @@ class MKMessage: NSObject, MessageType {
         self.kind  = MessageKind.text(message.message)
         
         switch message.type {
+            
         case kTEXT:
             self.kind = MessageKind.text(message.message)
+            
         case kPHOTO:
             let photoItem = PhotoMessage(path: message.pictureUrl)
             self.kind = MessageKind.photo(photoItem)
             self.photoItem = photoItem
+            
+        case kVIDEO:
+            let videoItem = VideoMessage(url: nil)
+            self.kind = MessageKind.video(videoItem)
+            self.videoItem = videoItem
+            
+        case kLOCATION:
+            
+            let locationItem = LocationMessage(location: CLLocation(latitude: message.latitude, longitude: message.longitude))
+            self.kind = MessageKind.location(locationItem)
+            self.locationItem = locationItem
+            
+            
         default:
             print("Unknown message type")
 

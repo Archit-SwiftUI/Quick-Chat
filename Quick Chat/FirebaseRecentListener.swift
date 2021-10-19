@@ -24,8 +24,8 @@ class FirebaseRecentListener {
                 return
             }
             
-            let allRecents = documents.compactMap { (snapshot) -> RecentChat? in
-                return try? snapshot.data(as: RecentChat.self)
+            let allRecents = documents.compactMap { (queryDocumentSnapshot) -> RecentChat? in
+                return try? queryDocumentSnapshot.data(as: RecentChat.self)
                 
             }
             

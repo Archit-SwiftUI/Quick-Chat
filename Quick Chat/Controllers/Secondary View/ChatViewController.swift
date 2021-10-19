@@ -228,7 +228,6 @@ class ChatViewController: MessagesViewController {
         
         FirebaseMessageListener.shared.listenForReadStatusChange(User.currentId, collectionId: chatId) { updatedMessage in
             
-            
             if updatedMessage.status != kSENT {
                 self.updatedMessage(updatedMessage)
             }
@@ -296,9 +295,9 @@ class ChatViewController: MessagesViewController {
     
     //MARK: - Actions
     
-    func messageSend(text: String?, photo: UIImage?, video: String?, audio: String?, location: String?, audioDescription: Float = 0.0) {
+    func messageSend(text: String?, photo: UIImage?, video: Video?, audio: String?, location: String?, audioDescription: Float = 0.0) {
         
-        OutgoingMessage.send(chatId: chatId, text: text, photo: photo, video: video, audio: audio, location: location, memberIds: [User.currentId, recpientId ])
+        OutgoingMessage.send(chatId: chatId, text: text, photo: photo, video: video, audio: audio, location: location, memberIds: [User.currentId, recpientId])
     }
     
     @objc func backButtonPressed() {
@@ -319,15 +318,22 @@ class ChatViewController: MessagesViewController {
         let takePhotoOrVideo = UIAlertAction(title: "Camera", style: .default) { alert in
             
             self.showImageGallery(camera: true)
-            print("Show camera...")
+
         }
         let shareMedia = UIAlertAction(title: "Library", style: .default) { alert in
             
             self.showImageGallery(camera: false)
-            print("Show library")
+            
         }
         let shareLocation = UIAlertAction(title: "Share Location", style: .default) { alert in
-            print("Share Location...")
+            
+            if let _ = LocationManager.shared.currentLocation {
+                self.messageSend(text: nil, photo: nil, video: nil, audio: nil, location: kLOCATION)
+            } else {
+                print("no access to location")
+            }
+            
+            
         }
         let cancleAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         
@@ -357,7 +363,6 @@ class ChatViewController: MessagesViewController {
     func typingIndicatorUpdate() {
         
         typingCounter += 1
-        print("Test.....")
         FirebaseTypingListener.saveTypingCounter(typing: true, chatRoomId: chatId)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
@@ -407,7 +412,6 @@ class ChatViewController: MessagesViewController {
                 if mkMessages[index].status == kREAD {
                     self.messagesCollectionView.reloadData()
                 }
-
             }
         }
         
@@ -461,6 +465,9 @@ extension ChatViewController : GalleryControllerDelegate {
     }
     
     func galleryController(_ controller: GalleryController, didSelectVideo video: Video) {
+        
+        self.messageSend(text: nil, photo: nil, video: video, audio: nil, location: nil)
+
         controller.dismiss(animated: true, completion: nil)
     }
     
@@ -471,9 +478,6 @@ extension ChatViewController : GalleryControllerDelegate {
     func galleryControllerDidCancel(_ controller: GalleryController) {
         controller.dismiss(animated: true, completion: nil)
     }
-    
-    
-    
 }
 
 

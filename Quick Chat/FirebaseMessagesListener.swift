@@ -87,9 +87,9 @@ class FirebaseMessageListener {
                 return
             }
             
-            var oldMessages = documents.compactMap { (snapshot) -> LocalMessage? in
+            var oldMessages = documents.compactMap { (queryDocumentSnapshot) -> LocalMessage? in
                 
-                return try? snapshot.data(as: LocalMessage.self)
+                return try? queryDocumentSnapshot.data(as: LocalMessage.self)
             }
             
             oldMessages.sort(by: { $0.date < $1.date})
