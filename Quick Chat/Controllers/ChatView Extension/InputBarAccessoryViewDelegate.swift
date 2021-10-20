@@ -4,12 +4,10 @@
 //
 //  Created by Archit Patel on 2021-10-16.
 //
-
 import Foundation
 import InputBarAccessoryView
 
-
-extension ChatViewController : InputBarAccessoryViewDelegate {
+extension ChatViewController: InputBarAccessoryViewDelegate {
     
     func inputBar(_ inputBar: InputBarAccessoryView, textViewTextDidChangeTo text: String) {
         
@@ -17,7 +15,7 @@ extension ChatViewController : InputBarAccessoryViewDelegate {
             typingIndicatorUpdate()
         }
         
-        updateMicButtonStatus(show: text == "" )
+        updateMicButtonStatus(show: text == "")
     }
     
     func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
@@ -32,4 +30,8 @@ extension ChatViewController : InputBarAccessoryViewDelegate {
         messageInputBar.inputTextView.text = ""
         messageInputBar.invalidatePlugins()
     }
+    
+    
 }
+
+

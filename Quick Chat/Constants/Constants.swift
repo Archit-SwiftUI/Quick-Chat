@@ -10,24 +10,32 @@ import UIKit
 let userDefaults  = UserDefaults.standard
 public let kFILEREFERENCE = "gs://quick-chat-917b2.appspot.com"
 
-public let KCURRENTUSER = "currentUser"
-public let KSTATUS = "status"
+
+public let kNUMBEROFMESSAGES = 12
+
+
+public let kCURRENTUSER = "currentUser"
+public let kSTATUS = "status"
 public let kFIRSTRUN = "firstRUN"
-public let KCHATROOMID = "chatRoomId"
+
+public let kCHATROOMID = "chatRoomId"
 public let kSENDERID = "senderId"
 
 public let kSENT = "Sent"
 public let kREAD = "Read"
-public let kTEXT = "Text"
-public let kPHOTO = "Photo"
-public let kVIDEO = "Vidoe"
-public let kAUDIO = "Audio"
-public let kLOCATION = "Location"
+
+public let kTEXT = "text"
+public let kPHOTO = "photo"
+public let kVIDEO = "video"
+public let kAUDIO = "audio"
+public let kLOCATION = "location"
+
+
 public let kDATE = "date"
-
-public let kNUMBEROFMESSAGES = 12
-
 public let kREADDATE = "date"
+
+public let kADMINID = "adminId"
+public let kMEMBERIDS = "memberIds"
 
 
 

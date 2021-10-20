@@ -5,7 +5,7 @@
 //  Created by Archit Patel on 2021-10-12.
 //
 
-import UIKit
+import Foundation
 import FirebaseFirestore
 
 enum FCollectionReference: String {
@@ -13,10 +13,10 @@ enum FCollectionReference: String {
     case Recent
     case Messages
     case Typing
+    case Channel
 }
 
 func FirebaseReference(_ collectionReference: FCollectionReference) -> CollectionReference {
-    
-    
     return Firestore.firestore().collection(collectionReference.rawValue)
 }
+

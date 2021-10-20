@@ -13,32 +13,35 @@ class FirebaseMessageListener {
     
     static let shared = FirebaseMessageListener()
     var newChatListener: ListenerRegistration!
-    var updateChatListener: ListenerRegistration!
+    var updatedChatListener: ListenerRegistration!
+
+    private init() { }
     
-    private init() {}
     
     func listenForNewChats(_ documentId: String, collectionId: String, lastMessageDate: Date) {
         
-        newChatListener = FirebaseReference(.Messages).document(documentId).collection(collectionId).whereField(kDATE, isGreaterThan: lastMessageDate).addSnapshotListener({ querySnapshot, error in
+        newChatListener = FirebaseReference(.Messages).document(documentId).collection(collectionId).whereField(kDATE, isGreaterThan: lastMessageDate).addSnapshotListener({ (querySnapshot, error) in
             
-            guard let snapshot = querySnapshot else {return}
+            guard let snapshot = querySnapshot else { return }
             
             for change in snapshot.documentChanges {
+                
                 if change.type == .added {
+                    
                     let result = Result {
                         try? change.document.data(as: LocalMessage.self)
                     }
                     
                     switch result {
-                        
                     case .success(let messageObject):
+                        
                         if let message = messageObject {
+                            
                             if message.senderId != User.currentId {
-                                
                                 RealmManager.shared.saveToRealm(message)
                             }
                         } else {
-                            print("Documents dosen't exists")
+                            print("Document doesnt exist")
                         }
                         
                     case .failure(let error):
@@ -47,52 +50,57 @@ class FirebaseMessageListener {
                 }
             }
         })
-        
     }
     
-    func listenForReadStatusChange(_ documentId : String, collectionId: String, completion: @escaping(_ updatedMessage: LocalMessage) -> Void) {
+    func listenForReadStatusChange(_ documentId: String, collectionId: String, completion: @escaping (_ updatedMessage: LocalMessage) -> Void) {
         
-        updateChatListener = FirebaseReference(.Messages).document(documentId).collection(collectionId).addSnapshotListener({ snapshot, error in
+        updatedChatListener = FirebaseReference(.Messages).document(documentId).collection(collectionId).addSnapshotListener({ (querySnapshot, error) in
             
-            guard let snapshot = snapshot else {return}
+            
+            guard let snapshot = querySnapshot else { return }
             
             for change in snapshot.documentChanges {
+                
                 if change.type == .modified {
-                    let result  = Result {
+                    let result = Result {
                         try? change.document.data(as: LocalMessage.self)
                     }
+                    
                     switch result {
                     case .success(let messageObject):
+                        
                         if let message = messageObject {
                             completion(message)
                         } else {
-                            print("Document does not exists in chat")
+                            print("Document does not exist chat")
                         }
                         
+                        
                     case .failure(let error):
-                        print("Error decoding local message", error.localizedDescription)
+                        print("Error decoding local message: \(error)")
                     }
                 }
             }
-            
         })
-        
     }
+
+
+    
     
     func checkForOldChats(_ documentId: String, collectionId: String) {
-        FirebaseReference(.Messages).document(documentId).collection(collectionId).getDocuments { snapshot, error in
+        
+        FirebaseReference(.Messages).document(documentId).collection(collectionId).getDocuments { (querySnapshot, error) in
             
-            guard let documents = snapshot?.documents else {
+            guard let documents = querySnapshot?.documents else {
                 print("no documents for old chats")
                 return
             }
             
             var oldMessages = documents.compactMap { (queryDocumentSnapshot) -> LocalMessage? in
-                
                 return try? queryDocumentSnapshot.data(as: LocalMessage.self)
             }
             
-            oldMessages.sort(by: { $0.date < $1.date})
+            oldMessages.sort(by: { $0.date < $1.date })
             
             for message in oldMessages {
                 RealmManager.shared.saveToRealm(message)
@@ -100,32 +108,37 @@ class FirebaseMessageListener {
         }
     }
     
-    //MARK: - Add, Update, Delete,
+    //MARK: - Add, Update, Delete
     
     func addMessage(_ message: LocalMessage, memberId: String) {
         
         do {
             let _ = try FirebaseReference(.Messages).document(memberId).collection(message.chatRoomId).document(message.id).setData(from: message)
-            
-        } catch {
-            print("error saving message")
+        }
+        catch {
+            print("error saving message ", error.localizedDescription)
         }
     }
     
-    //MARK: - Update message status
-    
-    func updateMessageInFirebase(_ message: LocalMessage, memberIds: [String]) {
-        
-        let values = [KSTATUS : kREAD, kREADDATE : Date()] as [String: Any]
-        
+
+
+
+    //MARK: - UpdateMessageStatus
+    func updateMessageInFireStore(_ message: LocalMessage, memberIds: [String]) {
+
+        let values = [kSTATUS : kREAD, kREADDATE : Date()] as [String : Any]
+
         for userId in memberIds {
             FirebaseReference(.Messages).document(userId).collection(message.chatRoomId).document(message.id).updateData(values)
         }
-        
     }
+
     
     func removeListeners() {
         self.newChatListener.remove()
-        self.updateChatListener.remove()
+        
+        if self.updatedChatListener != nil {
+            self.updatedChatListener.remove()
+        }
     }
 }

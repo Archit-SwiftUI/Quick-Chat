@@ -199,7 +199,6 @@ class LoginViewController: UIViewController {
             } else {
                 ProgressHUD.showFailed(error!.localizedDescription)
             }
-            return true
         }
     }
     

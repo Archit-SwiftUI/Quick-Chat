@@ -55,7 +55,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         authListener = Auth.auth().addStateDidChangeListener({ auth, user in
             Auth.auth().removeStateDidChangeListener(self.authListener!)
             
-            if user != nil  &&  userDefaults.object(forKey: KCURRENTUSER) != nil {
+            if user != nil  &&  userDefaults.object(forKey: kCURRENTUSER) != nil {
                 
                 DispatchQueue.main.async {
                     self.goToApp()

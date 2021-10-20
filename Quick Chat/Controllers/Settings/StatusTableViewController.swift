@@ -56,7 +56,7 @@ class StatusTableViewController: UITableViewController {
     //MARK: - LoadingStatus
     
     private func loadUserStatus() {
-        allStatus = userDefaults.object(forKey: KSTATUS) as! [String]
+        allStatus = userDefaults.object(forKey: kSTATUS) as! [String]
         tableView.reloadData()
     }
     
@@ -64,7 +64,7 @@ class StatusTableViewController: UITableViewController {
         if var user = User.currentUser {
             user.status = allStatus[indexPath.row]
             saveUserLocally(user)
-            FirebaseUserListener.shared.saveUserToFirestore(user)
+            FirebaseUserListener.shared.saveUserToFireStore(user)
         }
     }
 }

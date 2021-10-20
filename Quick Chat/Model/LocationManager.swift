@@ -17,13 +17,13 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     
     private override init() {
         super.init()
-        
-        //
+        requestLocationAccess()
     }
     
     func requestLocationAccess() {
         
         if locationManager == nil {
+            print("auth location manager")
             locationManager = CLLocationManager()
             locationManager!.delegate = self
             locationManager!.desiredAccuracy = kCLLocationAccuracyBest
@@ -35,7 +35,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     
     func startUpdating() {
         
-        locationManager?.startUpdatingLocation()
+        locationManager!.startUpdatingLocation()
     }
     
     func stopUpdating() {
@@ -45,21 +45,22 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         }
     }
     
-    
     //MARK: - Delegate
-    
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Failed to get location")
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
         currentLocation = locations.last!.coordinate
     }
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-    
+        
         if manager.authorizationStatus == .notDetermined {
-            self.locationManager?.requestWhenInUseAuthorization()
+            self.locationManager!.requestWhenInUseAuthorization()
         }
+        
     }
+    
 }

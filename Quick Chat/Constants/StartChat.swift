@@ -45,7 +45,7 @@ func createRecentItems(chatRoomId: String, users: [User]) {
     var memberIdsToCreateRecent = [users.first!.id, users.last!.id]
         
     //does user have recent?
-    FirebaseReference(.Recent).whereField(KCHATROOMID, isEqualTo: chatRoomId).getDocuments { (snapshot, error) in
+    FirebaseReference(.Recent).whereField(kCHATROOMID, isEqualTo: chatRoomId).getDocuments { (snapshot, error) in
         
         guard let snapshot = snapshot else { return }
         

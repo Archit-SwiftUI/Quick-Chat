@@ -107,7 +107,7 @@ class EditProfileTableViewController: UITableViewController {
             if var user = User.currentUser {
                 user.avatarLink = avatarLink ?? ""
                 saveUserLocally(user)
-                FirebaseUserListener.shared.saveUserToFirestore(user)
+                FirebaseUserListener.shared.saveUserToFireStore(user)
             }
             
             //TODO: Save image locally
@@ -131,7 +131,7 @@ extension EditProfileTableViewController : UITextFieldDelegate {
                     user.username = textField.text!
                     saveUserLocally(user)
                     
-                    FirebaseUserListener.shared.saveUserToFirestore(user)
+                    FirebaseUserListener.shared.saveUserToFireStore(user)
                 }
             }
             textField.resignFirstResponder()

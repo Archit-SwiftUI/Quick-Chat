@@ -25,7 +25,7 @@ struct User: Codable, Equatable {
     
     static var currentUser: User? {
         if Auth.auth().currentUser != nil {
-            if let dictionary = UserDefaults.standard.data(forKey: KCURRENTUSER) {
+            if let dictionary = UserDefaults.standard.data(forKey: kCURRENTUSER) {
                 
                 let decoder = JSONDecoder()
                 
@@ -54,7 +54,7 @@ func saveUserLocally(_ user: User) {
     do{
         
         let data = try encoder.encode(user)
-        UserDefaults.standard.set(data, forKey: KCURRENTUSER)
+        UserDefaults.standard.set(data, forKey: kCURRENTUSER)
         
     }catch {
         print("Error saving user locally", error.localizedDescription)
@@ -82,7 +82,7 @@ func createDummyUsers(){
             
             userIndex += 1
             
-            FirebaseUserListener.shared.saveUserToFirestore(user)
+            FirebaseUserListener.shared.saveUserToFireStore(user)
         }
         
         imageIndex += 1
