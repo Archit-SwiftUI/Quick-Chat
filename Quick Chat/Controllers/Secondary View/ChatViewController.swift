@@ -362,6 +362,11 @@ class ChatViewController: MessagesViewController {
         optionMenu.addAction(shareMedia)
         optionMenu.addAction(shareLocation)
         optionMenu.addAction(cancelAction)
+        
+        optionMenu.popoverPresentationController?.sourceView = self.view
+        let popoverRect = CGRect(x: 0, y: 0, width: 1, height: 1)
+        optionMenu.popoverPresentationController?.sourceRect = popoverRect
+        optionMenu.popoverPresentationController?.permittedArrowDirections = .up
 
         self.present(optionMenu, animated: true, completion: nil)
     }

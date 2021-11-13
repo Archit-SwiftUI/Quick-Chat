@@ -9,7 +9,7 @@ import UIKit
 
 let userDefaults  = UserDefaults.standard
 public let kFILEREFERENCE = "gs://quick-chat-917b2.appspot.com"
-public let kSERVERKEY = "AAAA-9-21FE:APA91bEj1b9IFEB-7xkmTQT5k_udX4S6aoZ5o3ltegwwen7T8-WKEuXJdosDQAxWREIiLml4-4fQt69FnnPOwnPw5Xgd70YtztCDaXHIg5iomMlz4zAfYMag4N61p7VbxlgtzhzP3gwv"
+public let kSERVERKEY = "AAAA-9-21FE:APA91bHkd7vqXp_pt4IvYeEuyuKPUP7newjmJAH_AUR-lGIobxheUdS0PcpLtPRMM4PA6Bh9ktBdbgBS9z1y9TvnwXL_Bd42Lzid65nW-LZt6BM7qJVM-GcqSker6Po1KKg9LVc5QgUB"
 
 
 public let kNUMBEROFMESSAGES = 12

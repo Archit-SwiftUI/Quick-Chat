@@ -85,7 +85,6 @@
 		7308D9852718AE260025129F /* UsersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersTableViewController.swift; sourceTree = "<group>"; };
 		7308D98B2718C74D0025129F /* ProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
 		73146F7F271E047100953C5C /* PhotoMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoMessage.swift; sourceTree = "<group>"; };
-		731E81902721EDFF009A8713 /* Quick ChatRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Quick ChatRelease.entitlements"; sourceTree = "<group>"; };
 		731E819127220252009A8713 /* PushNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationService.swift; sourceTree = "<group>"; };
 		732891D72720843F0042EAD5 /* AudioRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
 		732891D927208D240042EAD5 /* AudioMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioMessage.swift; sourceTree = "<group>"; };
@@ -331,7 +330,6 @@
 		738CF8C627138C81000EA497 /* Quick Chat */ = {
 			isa = PBXGroup;
 			children = (
-				731E81902721EDFF009A8713 /* Quick ChatRelease.entitlements */,
 				7308D968271632FF0025129F /* Resources */,
 				7308D966271632CE0025129F /* Constants */,
 				7308D9632716077C0025129F /* FirebaseHelpers */,
@@ -679,12 +677,17 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = "Quick Chat/Quick ChatDebug.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 5YMAD93VM2;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Quick Chat/Info.plist";
-				INFOPLIST_KEY_NSCameraUsageDescription = "$(PRODUCT_NAME) would like to use your camera";
+				INFOPLIST_KEY_NSAppleMusicUsageDescription = "Quick Chat would like to use your media library to upload images and video";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Quick Chat would like to use  your camera to upload images";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = " Quick Chat would like to use your location in order to use the location sharing messages";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Quick Chat would like to use your microphone to upload audio messages";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Quick Chat would like to use your library to upload images and videos";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -695,7 +698,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 4;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.archit.Quick-Chat";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -712,12 +715,17 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = "Quick Chat/Quick ChatRelease.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 5YMAD93VM2;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Quick Chat/Info.plist";
-				INFOPLIST_KEY_NSCameraUsageDescription = "$(PRODUCT_NAME) would like to use your camera";
+				INFOPLIST_KEY_NSAppleMusicUsageDescription = "Quick Chat would like to use your media library to upload images and video";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Quick Chat would like to use  your camera to upload images";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = " Quick Chat would like to use your location in order to use the location sharing messages";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Quick Chat would like to use your microphone to upload audio messages";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Quick Chat would like to use your library to upload images and videos";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -728,9 +736,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 4;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.archit.Quick-Chat";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

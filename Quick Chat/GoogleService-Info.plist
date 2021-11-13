@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CFBundleIdentifier</key>
+	<string></string>
 	<key>CLIENT_ID</key>
 	<string>1081790092369-jk4k3lo8ak6ppgh5htdn6rd2nmb1g5f3.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
